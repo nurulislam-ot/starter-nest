@@ -6,9 +6,17 @@ export const CreateUserSchema = z
       .string({
         required_error: 'name is required',
       })
-      .min(3)
-      .max(10),
-    age: z.number().int().positive(),
+      .min(3),
+    email: z
+      .string({
+        required_error: 'email is required',
+      })
+      .email(),
+    password: z
+      .string({
+        required_error: 'password is required',
+      })
+      .min(6),
   })
   .required();
 

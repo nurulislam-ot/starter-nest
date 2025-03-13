@@ -1,7 +1,8 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { UserController } from './dto/user.controller';
+import { UserController } from './users.controller';
 import { APP_PIPE } from '@nestjs/core';
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
+import { DatabaseModule } from 'src/database/database.module';
 
 @Module({
   controllers: [UserController],
@@ -15,7 +16,8 @@ import { UserService } from './user.service';
         transformOptions: { enableImplicitConversion: true },
       }),
     },
-    UserService,
+    UsersService,
   ],
+  imports: [DatabaseModule],
 })
-export class UserModule {}
+export class UsersModule {}

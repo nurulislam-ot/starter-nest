@@ -12,16 +12,16 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateUserDto } from '../user.dto';
-import { IdParamDto } from './id-param.dto';
+import { CreateUserDto } from './users.dto';
+import { IdParamDto } from './dto/id-param.dto';
 
-import { UserService } from '../user.service';
-import { ZodValidationPipe } from '../pipes/zod-validation.pipe';
-import { CreateUserSchema, CreateUserZodType } from './user-zod.dto';
+import { UsersService } from './users.service';
+import { ZodValidationPipe } from './pipes/zod-validation.pipe';
+import { CreateUserSchema, CreateUserZodType } from './dto/user-zod.dto';
 
-@Controller('user')
+@Controller('users')
 export class UserController {
-  constructor(private service: UserService) {}
+  constructor(private service: UsersService) {}
 
   @Get()
   findAll() {
@@ -35,8 +35,7 @@ export class UserController {
     // @Body(new ValidationPipe({ groups: ['create'] }))
     @Body() body: CreateUserZodType,
   ) {
-    console.log(body);
-    return this.service.create();
+    return this.service.create(body);
   }
 
   @Patch(':id')

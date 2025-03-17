@@ -9,10 +9,10 @@ export class UsersService {
     private readonly database: NodePgDatabase<typeof schema>,
   ) {}
   async findAll() {
-    return this.database.query.users.findMany();
+    return this.database.query.user.findMany();
   }
-  async create(user: typeof schema.users.$inferInsert) {
-    return this.database.insert(schema.users).values(user);
+  async create(user: typeof schema.user.$inferInsert) {
+    return this.database.insert(schema.user).values(user);
   }
   async update() {}
   async delete() {}
